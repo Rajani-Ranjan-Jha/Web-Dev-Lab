@@ -4,17 +4,18 @@
 }
 
 body {
-    background-color: black;
+    background-color: rgb(222, 171, 241);
     color: white;
     font-family: 'Poppins';
 }
 
 header {
-    background-color: #333;
+    background-color: #3b478b;
     font-size: x-large;
     text-align: center;
     margin: 1rem auto;
-    width: fit-content;
+    width: auto;
+    /* border-radius: 12px; */
 }
 
 @media screen and (max-width:670px) {
@@ -29,7 +30,7 @@ header {
 }
 
 nav {
-    background-color: #333;
+    background-color: #ec8946;
     /* padding: 1rem; */
     margin: 0.5rem 0px;
 }
@@ -46,10 +47,11 @@ nav li {
     /* margin: 0px 1em; */
     padding: 1%;
     border-radius: 8px;
+    transition: background-color 0.5s, cursor 0.5s;
 }
 
 nav li:hover {
-    background-color: #1d1d1d;
+    background-color: #f5ad7d;
     cursor: pointer;
 }
 
@@ -84,7 +86,7 @@ nav li:hover {
     width: auto;
     height: auto;
     margin: 1.5rem 0px;
-    background-color: #333;
+    background-color: #a3f3b1;
     /* border: 2px solid blue; */
     display: flex;
     flex-wrap: nowrap;
@@ -95,7 +97,8 @@ nav li:hover {
     white-space: nowrap;
     padding: 10px;
     scrollbar-width: thin;
-    /* scrollbar-track-color: rgb(255, 0, 0); */
+    scrollbar-color: rgb(255, 255, 255) rgb(0, 0, 0);
+
 }
 
 .main>.card {
@@ -104,7 +107,7 @@ nav li:hover {
     min-width: 250px;
     height: 300px;
     border-radius: 10px;
-    background-color: #0e0e0e;
+    background-color: #05580a;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin: 0px 1rem;
@@ -165,8 +168,9 @@ nav li:hover {
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
-    /* padding: 10px;  */
-    /* scrollbar-width: thin; */
+    background-color: rgb(108, 22, 129);
+    scrollbar-width: thin;
+    scrollbar-color: rgb(255, 255, 255) rgb(0, 0, 0);
 }
 table {
     width: auto;
@@ -177,25 +181,28 @@ table {
 }
 
 table th {
-    color: aqua;
+    color: rgb(255, 255, 255);
 
 }
 
 table th,
 td {
-    border: 1px solid rgb(185, 38, 38);
+    border: 1px solid rgb(255, 238, 0);
     padding: 10px;
     text-align: left;
 }
-
-table tr:hover {
-    background-color: #333;
+table tr{
+    transition: background-color 0.5s, cursor 0.5s, font-size 0.5s;
+}
+table tr:hover:not(:nth-child(1)) {
+    background-color: #d05df3;
     cursor: pointer;
+    font-size: large;
 }
 
 footer {
     width: auto;
-    background-color: #333;
+    background-color: #241e7c;
     padding: 1rem 0px;
     text-align: center;
     margin-top: 3rem;
