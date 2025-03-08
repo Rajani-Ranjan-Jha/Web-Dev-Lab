@@ -29,21 +29,30 @@
 
         function checkGuess() {
             const userGuess = parseInt(document.getElementById('guess').value);
-            attempts++;
 
-            if (attempts > maxAttempts) {
-                document.getElementById('message').innerText = `Game Over! The correct number was ${randomNumber}`;
-                document.getElementById('submit').disabled = true;
-            } else if (userGuess === randomNumber) {
-                document.getElementById('result').innerText = 'Congratulations! You guessed the number correctly.';
-                document.getElementById('submit').disabled = true;
+            if (userGuess >= 1 && userGuess <= 10) {
+                attempts++;
+
+                if (attempts == maxAttempts) {
+                    document.getElementById('result').innerText = `Game Over! The correct number was ${randomNumber}`;
+                    document.getElementById('submit').disabled = true;
+                } else if (userGuess === randomNumber) {
+                    document.getElementById('result').innerText = 'Congratulations! You guessed the number correctly.';
+                    document.getElementById('submit').disabled = true;
+                } else if (userGuess < randomNumber) {
+                    document.getElementById('result').innerText = `Try again! Your guess is too low. You have ${maxAttempts - attempts} attempts left.`;
+                } else if (userGuess > randomNumber) {
+                    document.getElementById('result').innerText = `Try again! Your guess is too high. You have ${maxAttempts - attempts} attempts left.`;
+                }
             } else {
-                document.getElementById('result').innerText = `Try again! You have ${maxAttempts - attempts} attempts left.`;
+                document.getElementById('result').innerText = 'Invalid input! Please enter a number between 1 and 10.'
             }
-        }
-        document.getElementById("guess").addEventListener("click", function () {
-            document.getElementById("guess").value = ''
 
+        }
+
+
+        document.getElementById("guess").addEventListener("focus", function () {
+            document.getElementById("guess").value = ''
         });
     </script>
 </body>
