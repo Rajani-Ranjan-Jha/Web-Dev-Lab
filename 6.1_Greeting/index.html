@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greeting Message</title>
+</head>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    div {
+        width: 400px;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        margin-top: 5rem;
+        gap: 3rem;
+    }
+</style>
+
+<body>
+    <div>
+        <input type="name" id="name" placeholder="Please enter your name here">
+        <input type="name" id="color" placeholder="what is your favorite color?">
+        <button type="submit" id="submit">Submit</button>
+    </div>
+    <script>
+        const nameInput = document.getElementById('name');
+        const colorInput = document.getElementById('color');
+        const submitButton = document.getElementById('submit');
+        // alert(nameInput.value)
+        submitButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            const name = nameInput.value.trim();
+            const color = colorInput.value.trim();
+            if (name && color) {
+                alert(`Hello, ${name}! Your favorite color is ${color}.`);
+                document.body.style.backgroundColor = color;
+            } else {
+                alert('Please fill in both fields');
+            }
+        })
+    </script>
+</body>
+
+</html>
