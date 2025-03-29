@@ -1,0 +1,27 @@
+[
+  {
+    "rollNumber": 1,
+    "name": "John Doe",
+    "grade": 85
+  },
+  {
+    "rollNumber": 2,
+    "name": "Jane Doe",
+    "grade": 92
+  },
+  {
+    "rollNumber": 3,
+    "name": "Bob Smith",
+    "grade": 78
+  },
+  {
+    "rollNumber": 4,
+    "name": "Alice Johnson",
+    "grade": 95
+  },
+  {
+    "rollNumber": 5,
+    "name": "Mike Brown",
+    "grade": 88
+  }
+]

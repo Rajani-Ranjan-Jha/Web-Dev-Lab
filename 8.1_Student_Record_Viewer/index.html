@@ -1,0 +1,102 @@
+<!-- Problem1: Student Record Viewer (JSON + Table)  
+Load student data from a local JSON file and display it in a table format using JavaScript. Add a search bar to filter students by name or roll number. Highlight top-performing students (e.g., grade > 90) in green. -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Record Viewer</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 2rem;
+            /* background-color: black; */
+            /* color: white; */
+        }
+        #search-bar{
+            width: 300px;
+            font-size: large;
+        }
+        table {
+            border-collapse: collapse;
+            /* background-image: linear-gradient(to bottom right, red, rgb(19, 0, 128)); */
+
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        .highlight {
+            background-color: #c6efce;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Student Record Viewer</h1>
+    <input type="search" id="search-bar" placeholder="Search by name or roll number">
+    <table id="student-table">
+        <thead>
+            <tr>
+                <th>Roll Number</th>
+                <th>Name</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody id="student-data">
+        </tbody>
+    </table>
+
+
+    <script>
+
+        fetch('./student.json')
+            .then(response => response.json())
+            .then(data => {
+                // data.forEach(student => {console.log(student)})
+
+                const studentTable = document.getElementById('student-data');
+                data.forEach(student => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+        <td>${student.rollNumber}</td>
+        <td>${student.name}</td>
+        <td>${student.grade}</td>
+      `;
+
+                    if (student.grade > 90) {
+                        row.classList.add('highlight');
+                    }
+                    studentTable.appendChild(row);
+                });
+
+
+                const searchBar = document.getElementById('search-bar');
+                searchBar.addEventListener('input', () => {
+                    const searchQuery = searchBar.value.toLowerCase();
+                    const rows = studentTable.children;
+                    for (const row of rows) {
+                        const rollNumber = row.children[0].textContent;
+                        const name = row.children[1].textContent;
+                        if (rollNumber.includes(searchQuery) || name.toLowerCase().includes(searchQuery)) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Error loading student data:', error));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!-- Problem2: Country Info Explorer (Dropdown + AJAX + JSON)
+Create a dropdown of countries. When a country is selected - Use AJAX to fetch country data (from an API or local JSON), Display capital, population, currency, flag etc. Add a searchable dropdown using <input> with filtering. Animate the flag display using a CSS transition. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Info Explorer</title>
+    <style>
+        
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center ;
+            /* gap: 2rem; */
+            background-color: #000000;
+            /* padding-top: 3rem; */
+        }
+        .container{
+            background-image: linear-gradient(to bottom right, red, blue);
+            border: 2px solid black;
+            border-radius: 2rem;
+            width: 80vw;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start ;
+            padding: 2rem;
+        }
+        .flag {
+            transition: opacity 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <input type="text" id="search-input" placeholder="Search countries..."> -->
+     <div class="container">
+        <h1>Country Info Explorer</h1>
+         <select id="country-select" >
+             <option value="">Select a country...</option>
+         </select>
+     
+         <div id="country-info">
+             <h2 id="country-name"></h2>
+             <p id="capital"></p>
+             <p id="population"></p>
+             <p id="currency"></p>
+             <img id="flag" class="flag">
+         </div>
+     </div>
+
+    <script>
+        
+
+        fetch("./country.json")
+            .then(response => response.json())
+            .then(data => {
+                populateCountryDropdown(data);
+                // document.getElementById("search-input").addEventListener("input", () => filterCountryDropdown(data));
+                document.getElementById("country-select").addEventListener("change", () => displayCountryInfo(data));
+            });
+
+        // Function to populate country dropdown
+        function populateCountryDropdown(data) {
+            const countrySelect = document.getElementById("country-select");
+            data.forEach(country => {
+                const option = document.createElement("option");
+                option.value = country.name;
+                option.text = country.name;
+                countrySelect.appendChild(option);
+            });
+        }
+
+        // Function to filter country dropdown based on search input
+        function filterCountryDropdown(data) {
+            const searchInput = document.getElementById("search-input");
+            const countrySelect = document.getElementById("country-select");
+            const filteredCountries = data.filter(country => country.name.toLowerCase().includes(searchInput.value.toLowerCase()));
+            countrySelect.innerHTML = "";
+            filteredCountries.forEach(country => {
+                const option = document.createElement("option");
+                option.value = country.name;
+                option.text = country.name;
+                countrySelect.appendChild(option);
+            });
+        }
+
+        // Function to display country info
+        function displayCountryInfo(data) {
+            const countrySelect = document.getElementById("country-select");
+            const selectedCountry = data.find(country => country.name === countrySelect.value);
+            if (selectedCountry) {
+                const countryName = document.getElementById("country-name");
+                const capital = document.getElementById("capital");
+                const population = document.getElementById("population");
+                const currency = document.getElementById("currency");
+                const flag = document.getElementById("flag");
+                countryName.textContent = selectedCountry.name;
+                capital.textContent = `Capital: ${selectedCountry.capital}`;
+                population.textContent = `Population: ${selectedCountry.population}`;
+                currency.textContent = `Currency: ${selectedCountry.currency}`;
+                flag.src = selectedCountry.flag;
+                // flag.style.opacity = 0;
+                // setTimeout(() => {
+                //     flag.style.opacity = 1;
+                // }, 100);
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

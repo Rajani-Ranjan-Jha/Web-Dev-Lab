@@ -1,0 +1,113 @@
+
+
+<!-- Problem3: Password Strength Checker
+Write a JavaScript program that creates a password strength checker that updates dynamically based on the user's input. You can use the password input field where users can type a password. Display password strength as Weak, Medium, or Strong based on:
+Weak: Less than 6 characters.
+Medium: 6-10 characters and contains letters & numbers.
+Strong: More than 10 characters and contains letters, numbers & special symbols.
+Show real-time strength indicators using a progress bar. 
+Q3. https://raunak01-raj.github.io/Portfolio/password_checker.html-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Checker </title>
+</head>
+
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: large;
+    }
+
+    .container {
+        width: 500px;
+        height: 300px;
+        margin: 5rem auto;
+        background-image: linear-gradient(purple, orange);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #text-input {
+        background-color: rgb(36, 36, 36);
+        color: white;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="password-input">
+            <input type="password" name="password" id="password" placeholder="Enter your password" maxlength="12">
+            <button id="show-hide-btn" onclick="showHidePassword()">Show</button>
+        </div>
+        <p>password strength: <span id="strength"></span></p>
+    </div>
+
+    <script>
+        const passInput = document.getElementById('password')
+        const strengthSpan = document.getElementById('strength')
+        const showHideBtn = document.getElementById('show-hide-btn')
+
+
+        passInput.addEventListener('input', StrengthChecker);
+
+        function StrengthChecker() {
+            let password = passInput.value;
+            let strength = 'low';
+            let hasNumber = false;
+            let hasUpper = false;
+            let hasLower = false;
+
+            // Check password length
+            if (password.length < 6) {
+                strength = 'low';
+            } else {
+                // Iterate through each character in the password
+                for (let i = 0; i < password.length; i++) {
+                    // Check if character is a number
+                    if (!isNaN(password[i])) {
+                        hasNumber = true;
+                    }
+                    // Check if character is uppercase
+                    else if (password[i] === password[i].toUpperCase() && password[i] !== password[i].toLowerCase()) {
+                        hasUpper = true;
+                    }
+                    // Check if character is lowercase
+                    else if (password[i] === password[i].toLowerCase() && password[i] !== password[i].toUpperCase()) {
+                        hasLower = true;
+                    }
+                }
+
+                // Determine password strength
+                if (hasNumber && hasUpper && hasLower) {
+                    strength = 'high';
+                } else if (hasNumber || hasUpper || hasLower) {
+                    strength = 'medium';
+                }
+            }
+            strengthSpan.textContent = strength;
+        }
+
+
+        function showHidePassword() {
+            if (passInput.type === 'password') {
+                passInput.type = 'text'
+                showHideBtn.textContent = 'Hide'
+            } else {
+                passInput.type = 'password'
+                showHideBtn.textContent = 'Show'
+            }
+        }
+
+    </script>
+</body>
+
+</html>

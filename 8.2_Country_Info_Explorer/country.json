@@ -1,0 +1,72 @@
+[
+  {
+      "name": "United States",
+      "capital": "Washington, D.C.",
+      "population": 331900000,
+      "currency": "United States Dollar",
+      "flag": "https://flagcdn.com/w160/us.png"
+  },
+  {
+      "name": "China",
+      "capital": "Beijing",
+      "population": 1409670000,
+      "currency": "Renminbi (Yuan)",
+      "flag": "https://flagcdn.com/w160/cn.png"
+  },
+  {
+      "name": "India",
+      "capital": "New Delhi",
+      "population": 1406631776,
+      "currency": "Indian Rupee",
+      "flag": "https://flagcdn.com/w160/in.png"
+  },
+  {
+      "name": "Russia",
+      "capital": "Moscow",
+      "population": 144444359,
+      "currency": "Russian Ruble",
+      "flag": "https://flagcdn.com/w160/ru.png"
+  },
+  {
+      "name": "Germany",
+      "capital": "Berlin",
+      "population": 83294633,
+      "currency": "Euro",
+      "flag": "https://flagcdn.com/w160/de.png"
+  },
+  {
+      "name": "Japan",
+      "capital": "Tokyo",
+      "population": 125124989,
+      "currency": "Japanese Yen",
+      "flag": "https://flagcdn.com/w160/jp.png"
+  },
+  {
+      "name": "France",
+      "capital": "Paris",
+      "population": 67749632,
+      "currency": "Euro",
+      "flag": "https://flagcdn.com/w160/fr.png"
+  },
+  {
+      "name": "United Kingdom",
+      "capital": "London",
+      "population": 67215293,
+      "currency": "Pound Sterling",
+      "flag": "https://flagcdn.com/w160/gb.png"
+  },
+  {
+      "name": "Brazil",
+      "capital": "Brasília",
+      "population": 213445417,
+      "currency": "Brazilian Real",
+      "flag": "https://flagcdn.com/w160/br.png"
+  },
+  {
+      "name": "Canada",
+      "capital": "Ottawa",
+      "population": 38246108,
+      "currency": "Canadian Dollar",
+      "flag": "https://flagcdn.com/w160/ca.png"
+  }
+]

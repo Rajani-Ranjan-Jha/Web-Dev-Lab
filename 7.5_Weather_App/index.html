@@ -1,0 +1,190 @@
+<!-- Problem5: Live Weather App (AJAX + JSON)
+Use AJAX to fetch weather data from a public API (like OpenWeatherMap or a mock JSON file), and display it dynamically. Create a form with a city input. On submit, use AJAX to fetch weather data in JSON format. Display weather info: temperature, condition, humidity etc. 
+https://raunak01-raj.github.io/Portfolio/weather_app.html  -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background-color: black;
+        color: white;
+    }
+
+    .container {
+        background-image: linear-gradient(to bottom left, rgb(255, 255, 255), rgb(0, 0, 0));
+
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .app {
+        background-image: linear-gradient(to bottom right, rgb(48, 48, 224), purple);
+        width: 80%;
+        height: 80%;
+        border-radius: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+
+    }
+
+    h1 {
+        text-align: center;
+        animation: appear;
+        animation-duration: 2s;
+        animation-delay: 0.5s;
+    }
+
+    .app>:nth-child(2) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 2rem 0;
+        gap: 2rem;
+    }
+
+    #city {
+        width: 200px;
+        height: 40px;
+        border-radius: 1rem;
+        border: none;
+        padding-left: 1rem;
+    }
+
+    #search-btn {
+        width: 100px;
+        height: 40px;
+        border-radius: 1rem;
+        border: none;
+        background-color: white;
+        /* padding-left: 1rem; */
+    }
+
+    #weather-info {
+        width: 350px;
+        height: 300px;
+        /* border: 2px solid red; */
+        font-size: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        padding-left: 2rem;
+        animation: appear;
+        animation-duration: 1s;
+        animation-delay: 0.5s;
+    }
+
+    @keyframes appear {
+        0% {
+            opacity: 0;
+            /* transform: scale(0.5); */
+
+        }
+
+        /* 50%{
+            opacity: 0.5;
+
+        } */
+        100% {
+            opacity: 1;
+            /* transform: scale(1); */
+
+        }
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="app">
+            <h1>Weather App</h1>
+            <div>
+                <input type="text" id="city" placeholder="Enter City">
+                <button id="search-btn">Search</button>
+            </div>
+            <div id="weather-info">
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const searchBtn = document.getElementById('search-btn');
+        const cityInput = document.getElementById('city');
+        const weatherInfo = document.getElementById('weather-info');
+        const api = 'https://api.openweathermap.org/data/2.5/weather?q=';
+        const apiKey = 'dbf3fe22c433d798678c0bf059f79d4d';
+        // const apiKey = 'ebc46a096ffb4f8284b11143565f7299';
+        const units = '&units=metric';
+        searchBtn.addEventListener('click', async () => {
+            await getWeather();
+        });
+
+
+        async function getWeather() {
+
+            const city = cityInput.value.trim();
+            if (!city) {
+                // Handle empty city input
+                weatherInfo.innerHTML = '<p>Please enter a city</p>';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${api}${city}&appid=${apiKey}${units}`);
+                if (!response.ok) {
+                    // Handle API request errors (e.g., 404, 500)
+                    throw new Error(`API request failed with status code ${response.status}`);
+                }
+                const data = await response.json();
+                const weather = data.weather[0];
+                const main = data.main;
+                const name = data.name;
+                const description = weather.description;
+                const temp = main.temp;
+                const humidity = main.humidity;
+                const wind = data.wind.speed;
+                const pressure = main.pressure;
+
+                // Clear previous weather information
+                weatherInfo.innerHTML = '';
+
+                // Update weather information
+                weatherInfo.innerHTML = `
+                <ul>
+                    <li><h2>City: ${name}</h2></li>
+                    <li>Weather: ${description}</li>
+                    <li>Temperature: ${temp}°C</li>
+                    <li>Humidity: ${humidity}%</li>
+                    <li>Wind: ${wind} m/s</li>
+                </ul>`;
+
+            } catch (error) {
+                // Handle any errors that occur during the API request or data processing
+                console.error(error);
+                weatherInfo.innerHTML = `<p>Error: ${error.message}</p>`;
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

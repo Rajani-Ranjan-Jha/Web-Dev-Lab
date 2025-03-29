@@ -1,0 +1,73 @@
+
+
+
+
+
+
+<!-- Problem2: Word Counter
+Create a text input area where users can type a paragraph and write a JavaScript function that counts the total number of words and characters in real-time. Display the word count and character count dynamically.
+Q2. https://raunak01-raj.github.io/Portfolio/word_counter.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Counter</title>
+</head>
+
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: large;
+    }
+
+    .container {
+        width: 500px;
+        height: 300px;
+        margin: 5rem auto;
+        background-image: linear-gradient(purple, orange);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #text-input{
+        background-color: rgb(36, 36, 36);
+        color: white;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <textarea id="text-input" rows="5" cols="50" placeholder="Type a paragraph here..."></textarea>
+        <div id="counter">
+            <p>Word Count: <span id="word-count">0</span></p>
+            <!-- <p>Character Count: <span id="char-count">0</span></p> -->
+        </div>
+
+    </div>
+
+    <script>
+        const textInput = document.getElementById('text-input');
+        const wordCountSpan = document.getElementById('word-count');
+        // const charCountSpan = document.getElementById('char-count');
+
+        textInput.addEventListener('input', updateCounter);
+
+        function updateCounter() {
+            const text = textInput.value.trim();
+            const words = text.split(/\s+/).filter(word => word !== '');
+            const wordCount = words.length;
+            // const charCount = text.length;
+
+            wordCountSpan.textContent = wordCount;
+            // charCountSpan.textContent = charCount;
+        }
+    </script>
+</body>
+
+</html>
